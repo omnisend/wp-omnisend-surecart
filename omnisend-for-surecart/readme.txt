@@ -3,9 +3,9 @@ Plugin Name: Omnisend for SureCart Add-On
 Contributors: omnisend,omnisendcommunity
 Tags: SureCart, form, email marketing, web tracking, subscriber collection
 Requires at least: 4.7
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,6 +79,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 7. Convert more visitors with highly-targeted landing pages
 
 == Changelog ==
+
+= 1.0.10 =
+* Tested up to WordPress 6.9
 
 = 1.0.9 =
 
