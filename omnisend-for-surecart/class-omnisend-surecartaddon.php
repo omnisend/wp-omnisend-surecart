@@ -3,7 +3,7 @@
  * Plugin Name: Omnisend for SureCart Add-On
  * Requires Plugins: surecart
  * Description: A SureCart add-on to sync Products/Categories/Orders/Contacts with Omnisend. In collaboration with SureCart plugin, it also enables better customer tracking
- * Version: 1.0.10
+ * Version: 1.0.11
  * Author: Omnisend
  * Author URI: https://www.omnisend.com
  * Developer: Omnisend
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'OMNISEND_SURECART_ADDON_NAME', 'Omnisend for SureCart Add-On' );
-define( 'OMNISEND_SURECART_ADDON_VERSION', '1.0.10' );
+define( 'OMNISEND_SURECART_ADDON_VERSION', '1.0.11' );
 
 spl_autoload_register( array( 'Omnisend_SureCartAddOn', 'autoloader' ) );
 register_deactivation_hook( __FILE__, array( 'Omnisend_SureCartAddOn', 'deactivation_actions' ) );
@@ -138,9 +138,9 @@ class Omnisend_SureCartAddOn {
 			return false;
 		}
 
-		$sc_token = get_option( '_transient_surecart_account' );
+		$sc_token = get_option( 'sc_api_token' );
 
-		if ( ! class_exists( '\SureCart\Rest\OrderRestServiceProvider' ) || ! is_object( $sc_token ) || ! isset( $sc_token['public_token'] ) ) {
+		if ( ! class_exists( '\SureCart\Rest\OrderRestServiceProvider' ) || $sc_token === false ) {
 			add_action( 'admin_notices', array( 'Omnisend_SureCartAddOn', 'surecart_is_not_connected_notice' ) );
 
 			return false;
