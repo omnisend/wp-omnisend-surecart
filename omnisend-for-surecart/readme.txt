@@ -5,7 +5,7 @@ Tags: SureCart, form, email marketing, web tracking, subscriber collection
 Requires at least: 4.7
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.12
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,6 +79,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 7. Convert more visitors with highly-targeted landing pages
 
 == Changelog ==
+
+= 1.1.0 =
+* Suggest privacy policy text via the WordPress privacy policy content API.
+* Add WordPress.org banner assets.
 
 = 1.0.12 =
 * Updated for WordPress 7.0 compatibility.
