@@ -3,7 +3,7 @@
  * Plugin Name: Omnisend for SureCart Add-On
  * Requires Plugins: surecart
  * Description: A SureCart add-on to sync Products/Categories/Orders/Contacts with Omnisend. In collaboration with SureCart plugin, it also enables better customer tracking
- * Version: 1.0.12
+ * Version: 1.1.0
  * Requires PHP: 7.4
  * Author: Omnisend
  * Author URI: https://www.omnisend.com
@@ -23,13 +23,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'OMNISEND_SURECART_ADDON_NAME', 'Omnisend for SureCart Add-On' );
-define( 'OMNISEND_SURECART_ADDON_VERSION', '1.0.12' );
+define( 'OMNISEND_SURECART_ADDON_VERSION', '1.1.0' );
 
 spl_autoload_register( array( 'Omnisend_SureCartAddOn', 'autoloader' ) );
 register_deactivation_hook( __FILE__, array( 'Omnisend_SureCartAddOn', 'deactivation_actions' ) );
 register_uninstall_hook( __FILE__, array( 'Omnisend_SureCartAddOn', 'uninstall_actions' ) );
 add_action( 'activated_plugin', array( 'Omnisend_SureCartAddOn', 'activation_actions' ) );
 add_action( 'plugins_loaded', array( 'Omnisend_SureCartAddOn', 'check_plugin_requirements' ) );
+add_action( 'admin_init', array( 'Omnisend_SureCartAddOn', 'add_privacy_policy_content' ) );
 
 use Omnisend\SureCartAddon\Actions\OmnisendAddOnAction;
 use Omnisend\SureCartAddon\Cron\OmnisendInitialSync;
@@ -97,6 +98,31 @@ class Omnisend_SureCartAddOn {
 		foreach ( $options as $option_code ) {
 			delete_option( $option_code );
 		}
+	}
+
+	/**
+	 * Suggests privacy policy text for site administrators, as recommended by the
+	 * WordPress privacy policy content API for plugins that collect user data.
+	 *
+	 * @return void
+	 */
+	public static function add_privacy_policy_content(): void {
+		if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
+			return;
+		}
+
+		$content =
+			'<p>' . esc_html__( 'The Omnisend for SureCart Add-On syncs your SureCart store data to Omnisend for email and SMS marketing purposes. Depending on your setup, this may include customer email addresses, first and last names, phone numbers, order and purchase history, the products and categories involved, your consent choices, and other contact information.', 'omnisend-for-surecart' ) . '</p>' .
+			'<p>' . esc_html__( 'This data is transmitted to and stored by Omnisend, a third-party service, and is retained there according to Omnisend’s data retention practices for as long as your contact record exists. Existing customers, orders, products and categories may also be synced to Omnisend in bulk when the add-on is activated.', 'omnisend-for-surecart' ) . '</p>' .
+			'<p>' . esc_html__( 'When the accompanying Omnisend plugin is active, a tracking snippet may also set cookies in visitors’ browsers to identify contacts and track their activity on the site.', 'omnisend-for-surecart' ) . '</p>' .
+			'<p>' . sprintf(
+				/* translators: 1: Omnisend Privacy Policy URL, 2: Omnisend Terms of Use URL */
+				esc_html__( 'You have the right to request access to, export of, or deletion of your personal data. For details on how Omnisend processes personal data and how to exercise these rights, see Omnisend’s Privacy Policy at %1$s and Terms of Use at %2$s.', 'omnisend-for-surecart' ),
+				'<a href="https://www.omnisend.com/privacy/" target="_blank">https://www.omnisend.com/privacy/</a>',
+				'<a href="https://www.omnisend.com/terms" target="_blank">https://www.omnisend.com/terms</a>'
+			) . '</p>';
+
+		wp_add_privacy_policy_content( OMNISEND_SURECART_ADDON_NAME, wp_kses_post( $content ) );
 	}
 
 	/**
