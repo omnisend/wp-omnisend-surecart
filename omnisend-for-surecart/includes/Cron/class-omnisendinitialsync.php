@@ -14,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Omnisend\SureCartAddon\Service\OmnisendInitialSyncService;
-use Omnisend\SureCartAddon\Provider\OmnisendSettingsProvider;
 
 /**
  * Class OmnisendInitialSync
