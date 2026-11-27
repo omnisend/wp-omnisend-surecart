@@ -15,7 +15,6 @@ use Omnisend\SureCartAddon\Service\SureCartModelService;
 use Omnisend\SureCartAddon\Converter\ValueConverter;
 use Omnisend\SureCartAddon\Transformers\ContactTransformer;
 use Omnisend\SureCartAddon\Transformers\Events\Components\DiscountTransformer;
-use Omnisend\SureCartAddon\Transformers\Events\Components\CategoryTransformer;
 use Omnisend\SureCartAddon\Transformers\Events\Components\AddressTransformer;
 use Omnisend\SureCartAddon\Transformers\Events\Components\TrackingTransformer;
 use Omnisend\SureCartAddon\Transformers\Events\Components\LineItemTransformer;
@@ -60,11 +59,6 @@ class OrderTransformer {
 	private $discount_transformer;
 
 	/**
-	 * @var CategoryTransformer
-	 */
-	private $category_transformer;
-
-	/**
 	 * @var AddressTransformer
 	 */
 	private $address_transformer;
@@ -84,7 +78,6 @@ class OrderTransformer {
 		$this->value_converter       = new ValueConverter();
 		$this->contact_transformer   = new ContactTransformer();
 		$this->discount_transformer  = new DiscountTransformer();
-		$this->category_transformer  = new CategoryTransformer();
 		$this->address_transformer   = new AddressTransformer();
 		$this->tracking_transformer  = new TrackingTransformer();
 		$this->line_item_transformer = new LineItemTransformer();
