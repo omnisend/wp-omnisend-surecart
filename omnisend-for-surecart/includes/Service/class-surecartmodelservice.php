@@ -14,7 +14,6 @@ use SureCart\Models\ProductCollection;
 use SureCart\Models\Order;
 use SureCart\Models\Customer;
 use SureCart\Models\Discount;
-use SureCart\Models\Promotion;
 use SureCart\Models\Refund;
 
 if ( ! defined( 'ABSPATH' ) ) {
